@@ -1,12 +1,21 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import Header from '../Components/Header.js';
+import Card from '../Components/Card.js';
 
 export default function Home () {
     return (
         <View>
             <Header/>
-            <Text>Home page</Text>
+            <ScrollView>
+                <Card/>
+                <Card/>
+                <Card/>
+                <Card/>
+                <Card/>
+                <Card/>
+                <Card/>
+            </ScrollView>
         </View>
     );
 }

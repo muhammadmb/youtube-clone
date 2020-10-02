@@ -5,7 +5,7 @@ import Card from '../Components/Card.js';
 
 export default function Home () {
     return (
-        <View>
+        <View style = {{flex:1}}>
             <Header/>
             <ScrollView>
                 <Card/>

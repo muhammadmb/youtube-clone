@@ -3,7 +3,7 @@ import {Image, View, Text, Dimensions} from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 const Card = () =>{
   return(
-    <View style = {{marginBottom:6}}>
+       <View style = {{marginBottom:6}}>
         <Image
             source = {{uri:"https://images.unsplash.com/photo-1601306483417-134e652e544f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"}}
             style = {{

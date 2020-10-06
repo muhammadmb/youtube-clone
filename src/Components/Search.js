@@ -1,11 +1,8 @@
-import React, {useState} from 'react';
-import {View,TextInput, ScrollView, FlatList,ActivityIndicator} from 'react-native';
-import {AntDesign,Octicons,Ionicons,MaterialCommunityIcons} from '@expo/vector-icons';
+import React, { useState } from "react";
+import {View,TextInput, FlatList,ActivityIndicator} from 'react-native';
+import {Ionicons,MaterialCommunityIcons} from '@expo/vector-icons';
 import Constant from 'expo-constants'
 import MiniCard from './MiniCard';
-
- // 
-// 
 
 
 const Search = () => {
@@ -13,7 +10,7 @@ const Search = () => {
     const [search, setSearch] = useState("");
     const [miniCardData, setMiniCardData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const APIKey = "AIzaSyBo6lFei_-w3XP6UL_9fYuGpHzIniMVk3c";
+    const APIKey = "AIzaSyA58jkqi9TjFK8Z5FRgvltvLrOh52omF14";
     const API = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${search}&type=video&key=${APIKey}`;
     const fetchData = ()=>{
         setLoading(true);
@@ -21,7 +18,10 @@ const Search = () => {
         .then(res => res.json())
         .then(data =>{
             setLoading(false);
+            console.log(data);
             setMiniCardData(data.items);
+        }).catch (err =>{
+            alert("check your internet connection")
         })
     }
     return(
@@ -34,15 +34,14 @@ const Search = () => {
                   justifyContent:'space-around'
               }}
             >
-                <Ionicons name="md-arrow-back" size={28} color="black" />
+                <Ionicons name="md-arrow-back" size={30} color="black" />
                 <TextInput
                 style = {{width : "70%", marginLeft:2, marginRight:1, backgroundColor:'#e6e6e6',height:35,padding:10,borderRadius:20}}
                 value = {search}
-                onChangeText = {(text) => setSearch(text)}
+                onChangeText = {(text) => {setSearch(text); fetchData();}}
                 />
-                <MaterialCommunityIcons name="send-circle" size={29} color="black" onPress = {() => fetchData()}/>
-                <Ionicons name="md-mic" size={28} color="black" />
-                <MaterialCommunityIcons name="filter-variant" size={28} color="black" />
+                <Ionicons name="md-mic" size={30} color="black" />
+                <MaterialCommunityIcons name="filter-variant" size={30} color="black" />
             </View>
             {loading ? 
                 <ActivityIndicator 

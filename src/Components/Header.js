@@ -2,8 +2,10 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {AntDesign,Octicons,Ionicons,MaterialCommunityIcons} from '@expo/vector-icons';
 import Constant from 'expo-constants'
+import { useNavigation } from '@react-navigation/native';
 
 export default function Header (){
+    const navigation = useNavigation();
     return (
         <View style = {{
             marginTop:Constant.statusBarHeight,
@@ -38,7 +40,14 @@ export default function Header (){
                 margin:7
             }}>
                 <Octicons name="device-camera-video" size={24} color="#c7c5c1" />
-                <Ionicons name="ios-search" size={24} color="#c7c5c1" />
+                <Ionicons 
+                    name="ios-search" 
+                    size={24} 
+                    color="#c7c5c1"
+                    onPress = {() =>{
+                        navigation.navigate("Search");
+                    }}
+                    />
                 <MaterialCommunityIcons name="account-circle" size={24} color="#c7c5c1" />
             </View>
         </View>

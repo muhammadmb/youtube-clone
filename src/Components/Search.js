@@ -5,7 +5,7 @@ import Constant from 'expo-constants'
 import MiniCard from './MiniCard';
 
 
-const Search = () => {
+const Search = ({navigation}) => {
 
     const [search, setSearch] = useState("");
     const [miniCardData, setMiniCardData] = useState([]);
@@ -34,7 +34,14 @@ const Search = () => {
                   justifyContent:'space-around'
               }}
             >
-                <Ionicons name="md-arrow-back" size={30} color="black" />
+                <Ionicons 
+                    name="md-arrow-back" 
+                    size={30} 
+                    color="black"
+                    onPress = {() => {
+                        navigation.goBack();
+                    }}
+                    />
                 <TextInput
                 style = {{width : "70%", marginLeft:2, marginRight:1, backgroundColor:'#e6e6e6',height:35,padding:10,borderRadius:20}}
                 value = {search}

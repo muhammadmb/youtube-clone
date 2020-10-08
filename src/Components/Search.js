@@ -3,15 +3,20 @@ import {View,TextInput, FlatList,ActivityIndicator} from 'react-native';
 import {Ionicons,MaterialCommunityIcons} from '@expo/vector-icons';
 import Constant from 'expo-constants'
 import MiniCard from './MiniCard';
-
+import {useSelector, useDispatch} from 'react-redux'
 
 const Search = ({navigation}) => {
 
+    const dispatch = useDispatch();
+    const miniCardData = useSelector(state =>{
+        return state;
+    })
     const [search, setSearch] = useState("");
     const [miniCardData, setMiniCardData] = useState([]);
     const [loading, setLoading] = useState(false);
     const APIKey = "AIzaSyA58jkqi9TjFK8Z5FRgvltvLrOh52omF14";
     const API = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${search}&type=video&key=${APIKey}`;
+    
     const fetchData = ()=>{
         setLoading(true);
         fetch(API)
@@ -19,7 +24,7 @@ const Search = ({navigation}) => {
         .then(data =>{
             setLoading(false);
             console.log(data);
-            setMiniCardData(data.items);
+            dispatch({type:"ADD", payload:data.items})
         }).catch (err =>{
             alert("check your internet connection")
         })

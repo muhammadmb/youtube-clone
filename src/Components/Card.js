@@ -7,7 +7,6 @@ const Card = () =>{
         <Image
             source = {{uri:"https://images.unsplash.com/photo-1601306483417-134e652e544f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"}}
             style = {{
-                // width:"100%",
                 height:200,
             }}
         />

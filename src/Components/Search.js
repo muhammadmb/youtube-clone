@@ -9,10 +9,9 @@ const Search = ({navigation}) => {
 
     const dispatch = useDispatch();
     const miniCardData = useSelector(state =>{
-        return state;
+        return state.cardData;
     })
     const [search, setSearch] = useState("");
-    const [miniCardData, setMiniCardData] = useState([]);
     const [loading, setLoading] = useState(false);
     const APIKey = "AIzaSyA58jkqi9TjFK8Z5FRgvltvLrOh52omF14";
     const API = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${search}&type=video&key=${APIKey}`;
@@ -23,7 +22,6 @@ const Search = ({navigation}) => {
         .then(res => res.json())
         .then(data =>{
             setLoading(false);
-            console.log(data);
             dispatch({type:"ADD", payload:data.items})
         }).catch (err =>{
             alert("check your internet connection")

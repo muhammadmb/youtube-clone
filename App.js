@@ -8,13 +8,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import VideoPlayer from './src/Screens/VideoPlayer';
 import Subscriptions from './src/Screens/Subscriptions';
 import Explore from './src/Screens/Explore';
-import {Ionicons} from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-import {Reducers} from './src/Reducers/Reducer';
+import {Reducer} from './src/Reducers/Reducer';
 
-const store = createStore();
+const store = createStore(Reducer);
 
 const Stack = createStackNavigator();
 const Taps = createBottomTabNavigator();
@@ -33,8 +32,6 @@ const RootHome = () =>{
             } else if (route.name === 'Subscriptions') {
               iconName = 'subscriptions';
             }
-
-            // You can return any component that you like here!
             return <MaterialIcons name={iconName} size = {24} color={color} />;
           },
         })}

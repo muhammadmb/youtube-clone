@@ -22,7 +22,8 @@ const Search = ({navigation}) => {
         .then(res => res.json())
         .then(data =>{
             setLoading(false);
-            dispatch({type:"ADD", payload:data.items})
+            dispatch({type:"ADD", payload:data.items});
+            console.log(data);
         }).catch (err =>{
             alert("check your internet connection")
         })

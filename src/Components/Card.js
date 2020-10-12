@@ -4,9 +4,13 @@ import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {useNavigation} from '@react-navigation/native'
 
 const Card = (props) =>{
+    const navigation = useNavigation();
   return(
       <TouchableOpacity
-        onPress = {() => console.log(props)}
+        onPress = {() => 
+            // console.log(props)
+            navigation.navigate("VideoPlayer",{videoId:props.video, title : props.title})
+        }
       >
         <View style = {{marginBottom:6}}>
             <Image

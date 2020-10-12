@@ -4,7 +4,10 @@ import Header from '../Components/Header.js';
 import { WebView } from 'react-native-webview';
 import Constant from 'expo-constants'
 
-const VideoPlayer = (props) =>{
+const VideoPlayer = ({route}) =>{
+
+    const {videoId,title} = route.params
+
     return (
         <View style ={{flex:1, marginTop:Constant.statusBarHeight}} >
             <Header/>
@@ -13,7 +16,9 @@ const VideoPlayer = (props) =>{
                 height:200
             }} >
                 <Webview
-                    source = {{uri:`https://www.youtube.com/embed/${props.videoId}`}}
+                    javaScriptEnabled = {true}
+                    domStorageEnabled = {true}
+                    source = {{uri:`https://www.youtube.com/embed/${videoId}`}}
                 />
             </View>
             <Text style = {{
@@ -23,7 +28,7 @@ const VideoPlayer = (props) =>{
             }}
             numberOfLines = {2}
             >
-                {props.title}
+                {title}
             </Text>
             <View 
                 style = {{borderBottomWidth:1}}

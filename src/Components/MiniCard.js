@@ -1,10 +1,12 @@
 import React from 'react';
 import {Image, View, Text, Dimensions,TouchableOpacity} from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation, useTheme} from '@react-navigation/native'
 
 const MiniCard = (props) =>{
     const navigation = useNavigation();
+    const {colors} = useTheme();
+    const {iconColor} = colors;
     return(
         <TouchableOpacity
             onPress = {() => 
@@ -27,14 +29,29 @@ const MiniCard = (props) =>{
                     <Text style = {{
                         fontSize:18,
                         width:Dimensions.get("screen").width/2,
-                        marginLeft:7
+                        marginLeft:7,
+                        color:iconColor
                         }}
                         numberOfLines = {3}
                     >
                         {props.title}
                     </Text>
-                    <Text style = {{fontSize:13,color:'#c7c5c1',marginLeft:7}}>{props.channelName}</Text>
-                    <Text style = {{fontSize:13,color:'#c7c5c1',marginLeft:7}}>8.8k . 2 weeks ago</Text>
+                    <Text style = {{
+                        fontSize:13,
+                        color:iconColor,
+                        marginLeft:7
+                        }}
+                    >
+                        {props.channelName}
+                    </Text>
+                    <Text style = {{
+                        fontSize:13,
+                        color:'#c7c5c1',
+                        marginLeft:7
+                        }}
+                    >
+                        8.8k . 2 weeks ago
+                    </Text>
                 </View>
             <MaterialCommunityIcons name="dots-vertical" size={24} color="black" />
             </View>

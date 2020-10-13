@@ -2,15 +2,17 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {AntDesign,Octicons,Ionicons,MaterialCommunityIcons} from '@expo/vector-icons';
 import Constant from 'expo-constants'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 
 export default function Header (){
+    const {colors} = useTheme();
+    const MyColor = colors.iconColor;
     const navigation = useNavigation();
     return (
         <View style = {{
             marginTop:Constant.statusBarHeight,
             height:40,
-            backgroundColor:"white",
+            backgroundColor:colors.headerColor,
             flexDirection:'row',
             justifyContent:'space-between',
             elevation:1
@@ -30,8 +32,12 @@ export default function Header (){
                 <Text style = {{
                     fontSize:20,
                     marginLeft:5,
-                    fontWeight:'bold'
-                }} > Youtube </Text>
+                    fontWeight:'bold',
+                    color:MyColor
+                }}
+                > 
+                    Youtube
+                </Text>
             </View>
             <View style = {{
                 flexDirection : 'row',
@@ -39,16 +45,24 @@ export default function Header (){
                 width:150,
                 margin:7
             }}>
-                <Octicons name="device-camera-video" size={24} color="#c7c5c1" />
+                <Octicons 
+                    name="device-camera-video" 
+                    size={24} 
+                    color={MyColor} 
+                />
                 <Ionicons 
                     name="ios-search" 
                     size={24} 
-                    color="#c7c5c1"
+                    color={MyColor}
                     onPress = {() =>{
                         navigation.navigate("Search");
                     }}
-                    />
-                <MaterialCommunityIcons name="account-circle" size={24} color="#c7c5c1" />
+                />
+                <MaterialCommunityIcons 
+                    name="account-circle" 
+                    size={24} 
+                    color={MyColor}
+                />
             </View>
         </View>
     );

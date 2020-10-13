@@ -15,7 +15,7 @@ const VideoPlayer = ({route}) =>{
                 width:"100%",
                 height:200
             }} >
-                <Webview
+                <WebView
                     javaScriptEnabled = {true}
                     domStorageEnabled = {true}
                     source = {{uri:`https://www.youtube.com/embed/${videoId}`}}

@@ -3,13 +3,16 @@ import {View,TextInput, FlatList,ActivityIndicator} from 'react-native';
 import {Ionicons,MaterialCommunityIcons} from '@expo/vector-icons';
 import Constant from 'expo-constants'
 import MiniCard from './MiniCard';
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
+import {useTheme} from '@react-navigation/native'
+
 
 const Search = ({navigation}) => {
-
+    const {colors} = useTheme();
+    const {iconColor} = colors;
     const dispatch = useDispatch();
     const miniCardData = useSelector(state =>{
-        return state.cardData;
+        return state;
     })
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
@@ -23,7 +26,6 @@ const Search = ({navigation}) => {
         .then(data =>{
             setLoading(false);
             dispatch({type:"ADD", payload:data.items});
-            console.log(data);
         }).catch (err =>{
             alert("check your internet connection")
         })
@@ -41,7 +43,7 @@ const Search = ({navigation}) => {
                 <Ionicons 
                     name="md-arrow-back" 
                     size={30} 
-                    color="black"
+                    color={iconColor}
                     onPress = {() => {
                         navigation.goBack();
                     }}
@@ -51,8 +53,8 @@ const Search = ({navigation}) => {
                 value = {search}
                 onChangeText = {(text) => {setSearch(text); fetchData();}}
                 />
-                <Ionicons name="md-mic" size={30} color="black" />
-                <MaterialCommunityIcons name="filter-variant" size={30} color="black" />
+                <Ionicons name="md-mic" size={30} color={iconColor} />
+                <MaterialCommunityIcons name="filter-variant" size={30} color={iconColor} />
             </View>
             {loading ? 
                 <ActivityIndicator 
@@ -74,8 +76,6 @@ const Search = ({navigation}) => {
                     />
                 }}
                 keyExtractor = {item => item.id.videoId}
-
-
             />
            
         </View>

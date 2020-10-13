@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import Home from './src/Screens/Home.js';
 import Search from './src/Components/Search.js';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme, useTheme } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import VideoPlayer from './src/Screens/VideoPlayer';
@@ -13,12 +12,32 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import {Reducer} from './src/Reducers/Reducer';
 
+const CustomDarkTheme = {
+  ...DarkTheme,
+  colors : {
+    ...DarkTheme.colors,
+    headerColor:"#404040",
+    iconColor:"white",
+    tapIcon:"white"
+  }
+}
+const CustomDefaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    headerColor:"white",
+    iconColor:"black",
+    tapIcon:"red"
+  }
+} 
+
 const store = createStore(Reducer);
 
 const Stack = createStackNavigator();
 const Taps = createBottomTabNavigator();
 
 const RootHome = () =>{
+  const {colors} = useTheme();
   return(
     <Taps.Navigator
         screenOptions={({ route }) => ({
@@ -36,7 +55,7 @@ const RootHome = () =>{
           },
         })}
         tabBarOptions={{
-          activeTintColor: 'red',
+          activeTintColor: colors.tapIcon,
           inactiveTintColor: 'gray',
         }}
     >
@@ -50,7 +69,7 @@ const RootHome = () =>{
 export default function App() {
   return (
     <Provider store = {store} >
-      <NavigationContainer>
+      <NavigationContainer theme={CustomDefaultTheme} >
         <Stack.Navigator headerMode = "none">
           <Stack.Screen name = "rootHome" component = {RootHome}/>
           <Stack.Screen name = "Search" component = {Search}/>

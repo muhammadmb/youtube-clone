@@ -70,27 +70,26 @@ const RootHome = () =>{
   );
 }
 
-export function app() {
-  
+export function Navigation() {
+  let currentTheme = useSelector (state =>{
+    return state.myDarkMode
+  })
   return (
-    
-        <Stack.Navigator headerMode = "none">
-          <Stack.Screen name = "rootHome" component = {RootHome}/>
-          <Stack.Screen name = "Search" component = {Search}/>
-          <Stack.Screen name = "VideoPlayer" component = {VideoPlayer}/>
-        </Stack.Navigator>
-     
-
+    <NavigationContainer theme={ currentTheme ? CustomDarkTheme : CustomDefaultTheme} >
+      <Stack.Navigator headerMode = "none">
+        <Stack.Screen name = "rootHome" component = {RootHome}/>
+        <Stack.Screen name = "Search" component = {Search}/>
+        <Stack.Screen name = "VideoPlayer" component = {VideoPlayer}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 export default () =>  {
-  
+
   return(
     <Provider store = {store} >
-      <NavigationContainer theme={ cuurentTheme ? CustomDarkTheme : CustomDefaultTheme} >
-       <App/>
-      </NavigationContainer>
+       <Navigation/>
     </Provider>
   );
 }

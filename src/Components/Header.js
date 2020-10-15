@@ -2,10 +2,16 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {AntDesign,Octicons,Ionicons,MaterialCommunityIcons} from '@expo/vector-icons';
 import Constant from 'expo-constants'
-import { useNavigation, useTheme } from '@react-navigation/native';
+import { useNavigation, useTheme} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux'
 
 export default function Header (){
     const {colors} = useTheme();
+    const dispatch = useDispatch();
+    const appTheme = useSelector(state =>{
+
+        return state.myDarkMode
+    });
     const MyColor = colors.iconColor;
     const navigation = useNavigation();
     return (
@@ -62,6 +68,9 @@ export default function Header (){
                     name="account-circle" 
                     size={24} 
                     color={MyColor}
+                    onPress = {() => {
+                        dispatch({type:"TOGGLE", payload:!appTheme})
+                    }}
                 />
             </View>
         </View>

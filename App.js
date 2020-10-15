@@ -8,9 +8,10 @@ import VideoPlayer from './src/Screens/VideoPlayer';
 import Subscriptions from './src/Screens/Subscriptions';
 import Explore from './src/Screens/Explore';
 import { MaterialIcons } from '@expo/vector-icons';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {Provider, useSelector} from 'react-redux';
+import {createStore, combineReducers } from 'redux';
 import {Reducer} from './src/Reducers/Reducer';
+import {themeReducer} from './src/Reducers/themeReducer';
 
 const CustomDarkTheme = {
   ...DarkTheme,
@@ -30,8 +31,11 @@ const CustomDefaultTheme = {
     tapIcon:"red"
   }
 } 
-
-const store = createStore(Reducer);
+const RootReducer = combineReducers ({
+  cardData : Reducer,
+  myDarkMode : themeReducer
+})
+const store = createStore(RootReducer);
 
 const Stack = createStackNavigator();
 const Taps = createBottomTabNavigator();
@@ -66,17 +70,27 @@ const RootHome = () =>{
   );
 }
 
-export default function App() {
+export function app() {
+  
   return (
-    <Provider store = {store} >
-      <NavigationContainer theme={CustomDefaultTheme} >
+    
         <Stack.Navigator headerMode = "none">
           <Stack.Screen name = "rootHome" component = {RootHome}/>
           <Stack.Screen name = "Search" component = {Search}/>
           <Stack.Screen name = "VideoPlayer" component = {VideoPlayer}/>
         </Stack.Navigator>
+     
+
+  );
+}
+
+export default () =>  {
+  
+  return(
+    <Provider store = {store} >
+      <NavigationContainer theme={ cuurentTheme ? CustomDarkTheme : CustomDefaultTheme} >
+       <App/>
       </NavigationContainer>
     </Provider>
-
   );
 }

@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 
 export default function Home ({navigation}) {
     const cardData = useSelector(state =>{
-        return state;
+        return state.cardData;
     })
     return (
         <View style = {{flex:1}}>

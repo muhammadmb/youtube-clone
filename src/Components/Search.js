@@ -12,7 +12,7 @@ const Search = ({navigation}) => {
     const {iconColor} = colors;
     const dispatch = useDispatch();
     const miniCardData = useSelector(state =>{
-        return state;
+        return state.cardData;
     })
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
